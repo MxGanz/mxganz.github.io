@@ -1,5 +1,12 @@
-body {
+* {
     color: black;
     background-color: burlywood;
-    
+    padding: 100;
+    margin: 100;
+}
+
+canvas {
+    background-color: #eee;
+    display: block;
+    margin: 0 auto;
 }

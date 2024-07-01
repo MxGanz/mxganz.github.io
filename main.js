@@ -1,11 +1,9 @@
 
-let button1 = document.getElementsById("button1").addEventListener("click", clickButton())
-let result = document.getElementByName("result")
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 
-function clickButton() {
-    let x = document.getElementByName("input1")
-    let y = document.getElementByName("input2")
-    
-    result.setText(x + y)
-    
-}
+ctx.beginPath();
+ctx.rect(20, 40, 50, 50);
+ctx.fillStyle = "#FF0000";
+ctx.fill();
+ctx.closePath();
