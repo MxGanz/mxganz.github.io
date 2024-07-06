@@ -4,348 +4,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Space Shooter</title>
+    <title>Game Dev Portfolio</title>
     <style>
-        canvas {
-            border: 1px solid black;
+        :root {
+            --black: #000000;
+            --light-purple: #E6E6FA;
+            --royal-purple: #7B68EE;
         }
 
-        #menuScreen,
-        #gameOverScreen {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background-color: var(--light-purple);
+        }
+
+        header {
+            background-color: var(--black);
+            color: var(--light-purple);
             text-align: center;
-            font-family: Arial, sans-serif;
+            padding: 2rem 0;
+            background-image: url('');
+            /* Add your image URL here */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .header-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light-purple);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--royal-purple);
+        }
+
+        nav {
+            background-color: var(--royal-purple);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: var(--light-purple);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--black);
+        }
+
+        main {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            color: var(--royal-purple);
+            margin-bottom: 1rem;
+        }
+
+        .project {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .project img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .project-info {
+            text-align: center;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .project-tag {
+            background-color: var(--light-purple);
+            color: var(--royal-purple);
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            margin: 0.2rem;
+            font-size: 0.8rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .skill {
+            background-color: var(--royal-purple);
+            color: var(--light-purple);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.5rem;
+            font-size: 0.9rem;
+            transition: transform 0.2s ease;
+        }
+
+        .skill:hover {
+            transform: scale(1.1);
+        }
+
+        form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--royal-purple);
+            border-radius: 3px;
         }
 
         button {
-            font-size: 20px;
-            padding: 10px 20px;
-            margin-top: 20px;
+            background-color: var(--royal-purple);
+            color: var(--light-purple);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: var(--black);
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: var(--black);
+            color: var(--light-purple);
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 
 <body>
-    <canvas id="gameCanvas" width="800" height="600"></canvas>
-    <div id="menuScreen">
-        <h1>Space Shooter</h1>
-        <button id="startButton">Start Game</button>
-    </div>
-    <div id="gameOverScreen" style="display: none;">
-        <h1>You Died</h1>
-        <p>Your Score: <span id="finalScore"></span></p>
-        <button id="restartButton">Restart Game</button>
-    </div>
+    <header>
+        <div class="header-content">
+            <h1>John Doe</h1>
+            <p>Game Developer & Designer</p>
+            <div class="social-links">
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Buy Me A Coffee"><i class="fas fa-mug-hot"></i></a>
+                <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>I'm a passionate game developer with 5 years of experience in creating immersive and engaging gaming
+                experiences. My expertise spans across various genres and platforms, from mobile casual games to VR
+                experiences.</p>
+        </section>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div id="projects-container"></div>
+        </section>
+        <section id="skills">
+            <h2>Skills</h2>
+            <div id="skills-container" class="skills"></div>
+        </section>
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form id="contact-form">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 John Doe. All rights reserved.</p>
+    </footer>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
     <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        const menuScreen = document.getElementById('menuScreen');
-        const gameOverScreen = document.getElementById('gameOverScreen');
-        const startButton = document.getElementById('startButton');
-        const restartButton = document.getElementById('restartButton');
-        const finalScoreSpan = document.getElementById('finalScore');
+        // Data for projects and skills
+        const projects = [
+            {
+                title: "Cosmic Crusaders",
+                description: "A space-themed action RPG with stunning visuals and an intricate storyline. Developed using Unreal Engine.",
+                image: "/api/placeholder/400/300",
+                tags: ["Unreal Engine", "C++", "3D Modeling"]
+            },
+            {
+                title: "Puzzle Paradise",
+                description: "A mobile puzzle game that challenges players' logical thinking. Built with Unity for iOS and Android.",
+                image: "/api/placeholder/400/300",
+                tags: ["Unity", "C#", "Mobile Development"]
+            }
+        ];
 
-        let gameState = 'menu'; // 'menu', 'playing', 'gameOver'
+        const skills = ["Unity", "Unreal Engine", "C#", "C++", "3D Modeling", "Game Design", "AI Programming", "Mobile Development"];
 
-        // Game objects
-        let player, projectiles, enemies, powerUps, stars, score;
+        // Function to create project elements
+        function createProjectElement(project) {
+            const projectDiv = document.createElement('div');
+            projectDiv.className = 'project';
+            projectDiv.innerHTML = `
+                <img src="${project.image}" alt="${project.title}">
+                <div class="project-info">
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                    <div class="project-tags">
+                        ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+            return projectDiv;
+        }
 
-        function initGame() {
-            player = {
-                x: canvas.width / 2,
-                y: canvas.height - 30,
-                width: 50,
-                height: 50,
-                speed: 5,
-                fireRate: 20,
-                fireCooldown: 0,
-                isShooting: false,
-                health: 5
+        // Function to create skill elements
+        function createSkillElement(skill) {
+            const skillSpan = document.createElement('span');
+            skillSpan.className = 'skill';
+            skillSpan.textContent = skill;
+            return skillSpan;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('nav a');
+            const contactForm = document.getElementById('contact-form');
+            const projectsContainer = document.getElementById('projects-container');
+            const skillsContainer = document.getElementById('skills-container');
+
+            // Populate projects
+            projects.forEach(project => {
+                const projectElement = createProjectElement(project);
+                projectsContainer.appendChild(projectElement);
+
+                // Add pop animation on hover
+                projectElement.addEventListener('mouseenter', () => {
+                    projectElement.style.animation = 'pop 0.3s ease';
+                });
+                projectElement.addEventListener('animationend', () => {
+                    projectElement.style.animation = '';
+                });
+            });
+
+            // Populate skills
+            skills.forEach(skill => {
+                skillsContainer.appendChild(createSkillElement(skill));
+            });
+
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Contact form submission (for demonstration purposes)
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                // In a real application, you would send this data to a server
+                console.log('Form submitted:', { name, email, message });
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
+            });
+
+            // Fade in sections on scroll
+            const sections = document.querySelectorAll('section');
+            const fadeInSection = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
             };
 
-            projectiles = [];
-            enemies = [];
-            powerUps = [];
-            stars = [];
-            score = 0;
-
-            // Create stars for background
-            for (let i = 0; i < 100; i++) {
-                stars.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2 + 1
-                });
-            }
-        }
-
-        // Key states
-        const keys = {
-            ArrowLeft: false,
-            ArrowRight: false,
-            Space: false
-        };
-
-        // Game loop
-        function gameLoop() {
-            if (gameState === 'playing') {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                drawBackground();
-                handleShooting();
-                movePlayer();
-                drawPlayer();
-                moveProjectiles();
-                drawProjectiles();
-
-                if (Math.random() < 0.02) {
-                    spawnEnemy();
-                }
-                moveEnemies();
-                drawEnemies();
-
-                if (Math.random() < 0.005) {
-                    spawnPowerUp();
-                }
-                movePowerUps();
-                drawPowerUps();
-
-                checkCollisions();
-                handleShooting();
-                drawScore();
-                drawHealth();
-
-                if (player.health <= 0) {
-                    gameState = 'gameOver';
-                    showGameOverScreen();
-                }
-
-                requestAnimationFrame(gameLoop);
-            }
-        }
-
-        function drawBackground() {
-            ctx.fillStyle = 'black';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = 'white';
-            stars.forEach(star => {
-                ctx.fillRect(star.x, star.y, star.size, star.size);
+            const sectionObserver = new IntersectionObserver(fadeInSection, {
+                root: null,
+                threshold: 0.1
             });
-        }
 
-        function movePlayer() {
-            if (keys.ArrowLeft && player.x > player.width / 2) {
-                player.x -= player.speed;
-            }
-            if (keys.ArrowRight && player.x < canvas.width - player.width / 2) {
-                player.x += player.speed;
-            }
-        }
-
-        function drawPlayer() {
-            ctx.fillStyle = 'blue';
-            ctx.beginPath();
-            ctx.moveTo(player.x, player.y - player.height / 2);
-            ctx.lineTo(player.x - player.width / 2, player.y + player.height / 2);
-            ctx.lineTo(player.x + player.width / 2, player.y + player.height / 2);
-            ctx.closePath();
-            ctx.fill();
-        }
-
-        function moveProjectiles() {
-            for (let i = projectiles.length - 1; i >= 0; i--) {
-                projectiles[i].y -= 10;
-                if (projectiles[i].y < 0) {
-                    projectiles.splice(i, 1);
-                }
-            }
-        }
-
-        function drawProjectiles() {
-            ctx.fillStyle = 'red';
-            projectiles.forEach(projectile => {
-                ctx.fillRect(projectile.x - 2, projectile.y - 10, 4, 10);
+            sections.forEach(section => {
+                sectionObserver.observe(section);
             });
-        }
-
-        function spawnEnemy() {
-            enemies.push({
-                x: Math.random() * canvas.width,
-                y: 0,
-                width: 40,
-                height: 40,
-                speed: 2
-            });
-        }
-
-        function moveEnemies() {
-            for (let i = enemies.length - 1; i >= 0; i--) {
-                enemies[i].y += enemies[i].speed;
-                if (enemies[i].y > canvas.height) {
-                    enemies.splice(i, 1);
-                    player.health = Math.max(0, player.health - 1);
-                }
-            }
-        }
-
-        function drawEnemies() {
-            ctx.fillStyle = 'green';
-            enemies.forEach(enemy => {
-                ctx.beginPath();
-                ctx.moveTo(enemy.x, enemy.y - enemy.height / 2);
-                ctx.lineTo(enemy.x - enemy.width / 2, enemy.y + enemy.height / 2);
-                ctx.lineTo(enemy.x + enemy.width / 2, enemy.y + enemy.height / 2);
-                ctx.closePath();
-                ctx.fill();
-            });
-        }
-
-        function spawnPowerUp() {
-            powerUps.push({
-                x: Math.random() * canvas.width,
-                y: 0,
-                width: 20,
-                height: 20,
-                speed: 1,
-                type: Math.random() < 0.5 ? 'fireRate' : 'speed'
-            });
-        }
-
-        function movePowerUps() {
-            for (let i = powerUps.length - 1; i >= 0; i--) {
-                powerUps[i].y += powerUps[i].speed;
-                if (powerUps[i].y > canvas.height) {
-                    powerUps.splice(i, 1);
-                }
-            }
-        }
-
-        function drawPowerUps() {
-            powerUps.forEach(powerUp => {
-                ctx.fillStyle = powerUp.type === 'fireRate' ? 'yellow' : 'purple';
-                ctx.fillRect(powerUp.x - powerUp.width / 2, powerUp.y - powerUp.height / 2, powerUp.width, powerUp.height);
-            });
-        }
-
-        function checkCollisions() {
-            // Projectile-Enemy collisions
-            for (let i = projectiles.length - 1; i >= 0; i--) {
-                for (let j = enemies.length - 1; j >= 0; j--) {
-                    if (
-                        projectiles[i].x > enemies[j].x - enemies[j].width / 2 &&
-                        projectiles[i].x < enemies[j].x + enemies[j].width / 2 &&
-                        projectiles[i].y > enemies[j].y - enemies[j].height / 2 &&
-                        projectiles[i].y < enemies[j].y + enemies[j].height / 2
-                    ) {
-                        projectiles.splice(i, 1);
-                        enemies.splice(j, 1);
-                        score += 10;
-                        break;
-                    }
-                }
-            }
-
-            // Player-PowerUp collisions
-            for (let i = powerUps.length - 1; i >= 0; i--) {
-                if (
-                    player.x - player.width / 2 < powerUps[i].x + powerUps[i].width / 2 &&
-                    player.x + player.width / 2 > powerUps[i].x - powerUps[i].width / 2 &&
-                    player.y - player.height / 2 < powerUps[i].y + powerUps[i].height / 2 &&
-                    player.y + player.height / 2 > powerUps[i].y - powerUps[i].height / 2
-                ) {
-                    if (powerUps[i].type === 'fireRate') {
-                        player.fireRate = Math.max(1, player.fireRate - 2);
-                    } else {
-                        player.speed += 1;
-                    }
-                    powerUps.splice(i, 1);
-                }
-            }
-        }
-
-        function handleShooting() {
-            if (player.isShooting && player.fireCooldown <= 0) {
-                projectiles.push({ x: player.x, y: player.y - player.height / 2 });
-                player.fireCooldown = player.fireRate;
-            }
-            player.fireCooldown = Math.max(0, player.fireCooldown - 1);
-        }
-
-        function drawScore() {
-            ctx.fillStyle = 'white';
-            ctx.font = '20px Arial';
-            ctx.fillText(`Score: ${score}`, 10, 30);
-        }
-
-        function drawHealth() {
-            const heartSize = 20;
-            const padding = 5;
-            for (let i = 0; i < player.health; i++) {
-                drawHeart(canvas.width - (heartSize + padding) * (i + 1), padding, heartSize);
-            }
-        }
-
-        function drawHeart(x, y, size) {
-            ctx.fillStyle = 'red';
-            ctx.beginPath();
-            ctx.moveTo(x, y + size / 4);
-            ctx.quadraticCurveTo(x, y, x + size / 4, y);
-            ctx.quadraticCurveTo(x + size / 2, y, x + size / 2, y + size / 4);
-            ctx.quadraticCurveTo(x + size / 2, y, x + size * 3 / 4, y);
-            ctx.quadraticCurveTo(x + size, y, x + size, y + size / 4);
-            ctx.quadraticCurveTo(x + size, y + size / 2, x + size / 2, y + size * 3 / 4);
-            ctx.quadraticCurveTo(x, y + size / 2, x, y + size / 4);
-            ctx.fill();
-        }
-
-        function showGameOverScreen() {
-            gameOverScreen.style.display = 'block';
-            finalScoreSpan.textContent = score;
-        }
-
-        function hideGameOverScreen() {
-            gameOverScreen.style.display = 'none';
-        }
-
-        // Event listeners
-        document.addEventListener('keydown', (e) => {
-            if (e.key in keys) {
-                keys[e.key] = true;
-            }
-            if (e.key === ' ' || e.key === 'Space') {
-                player.isShooting = true;
-            }
         });
-
-        document.addEventListener('keyup', (e) => {
-            if (e.key in keys) {
-                keys[e.key] = false;
-            }
-            if (e.key === ' ' || e.key === 'Space') {
-                player.isShooting = false;
-            }
-        });
-
-        startButton.addEventListener('click', () => {
-            menuScreen.style.display = 'none';
-            gameState = 'playing';
-            initGame();
-            gameLoop();
-        });
-
-        restartButton.addEventListener('click', () => {
-            hideGameOverScreen();
-            gameState = 'playing';
-            initGame();
-            gameLoop();
-        });
-
-        // Initialize the game
-        initGame();
     </script>
 </body>
 
