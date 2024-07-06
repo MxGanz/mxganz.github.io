@@ -1,245 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<link rel="stylesheet" href="style.css">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Dev Portfolio</title>
-    <style>
-        :root {
-            --black: #000000;
-            --light-purple: #E6E6FA;
-            --royal-purple: #7B68EE;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: var(--black);
-            background-color: var(--light-purple);
-        }
-
-        header {
-            background-color: var(--black);
-            color: var(--light-purple);
-            text-align: center;
-            padding: 2rem 0;
-            background-image: url('');
-            /* Add your image URL here */
-            background-size: cover;
-            background-position: center;
-        }
-
-        .header-content {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 1rem;
-            border-radius: 10px;
-        }
-
-        h1 {
-            margin-bottom: 1rem;
-        }
-
-        .social-links {
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: var(--light-purple);
-            font-size: 1.5rem;
-            margin: 0 0.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--royal-purple);
-        }
-
-        nav {
-            background-color: var(--royal-purple);
-            padding: 1rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav ul {
-            list-style-type: none;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li {
-            margin: 0 1rem;
-        }
-
-        nav ul li a {
-            color: var(--light-purple);
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: var(--black);
-        }
-
-        main {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        section {
-            background-color: #fff;
-            border-radius: 5px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h2 {
-            color: var(--royal-purple);
-            margin-bottom: 1rem;
-        }
-
-        .project {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 2rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .project img {
-            width: 100%;
-            max-width: 400px;
-            height: auto;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 1rem;
-        }
-
-        .project-info {
-            text-align: center;
-        }
-
-        .project-info h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 0.5rem;
-        }
-
-        .project-tag {
-            background-color: var(--light-purple);
-            color: var(--royal-purple);
-            padding: 0.2rem 0.5rem;
-            border-radius: 10px;
-            margin: 0.2rem;
-            font-size: 0.8rem;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .skill {
-            background-color: var(--royal-purple);
-            color: var(--light-purple);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            margin: 0.5rem;
-            font-size: 0.9rem;
-            transition: transform 0.2s ease;
-        }
-
-        .skill:hover {
-            transform: scale(1.1);
-        }
-
-        form {
-            display: grid;
-            gap: 1rem;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid var(--royal-purple);
-            border-radius: 3px;
-        }
-
-        button {
-            background-color: var(--royal-purple);
-            color: var(--light-purple);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        button:hover {
-            background-color: var(--black);
-            transform: scale(1.05);
-        }
-
-        footer {
-            background-color: var(--black);
-            color: var(--light-purple);
-            text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
-        }
-
-        @keyframes pop {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-    </style>
 </head>
 
 <body>
     <header>
         <div class="header-content">
-            <h1>John Doe</h1>
+            <h1>Mx.Ganz</h1>
             <p>Game Developer & Designer</p>
             <div class="social-links">
                 <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -258,10 +29,12 @@
     </nav>
     <main>
         <section id="about">
-            <h2>About Me</h2>
-            <p>I'm a passionate game developer with 5 years of experience in creating immersive and engaging gaming
-                experiences. My expertise spans across various genres and platforms, from mobile casual games to VR
-                experiences.</p>
+            <h2>About Mx.Ganz</h2>
+            <p>
+                I'm a developer and designer who loves creatively solving problems and 
+                makings things that entertain people. Some of my projects are shown below, and 
+                the links to my socials are found above. Thanks for visiting!
+            </p>
         </section>
         <section id="projects">
             <h2>Projects</h2>
@@ -282,122 +55,10 @@
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 John Doe. All rights reserved.</p>
+        <p>&copy; 2024 Mx.Ganz. All rights reserved.</p>
     </footer>
     <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
-    <script>
-        // Data for projects and skills
-        const projects = [
-            {
-                title: "Cosmic Crusaders",
-                description: "A space-themed action RPG with stunning visuals and an intricate storyline. Developed using Unreal Engine.",
-                image: "/api/placeholder/400/300",
-                tags: ["Unreal Engine", "C++", "3D Modeling"]
-            },
-            {
-                title: "Puzzle Paradise",
-                description: "A mobile puzzle game that challenges players' logical thinking. Built with Unity for iOS and Android.",
-                image: "/api/placeholder/400/300",
-                tags: ["Unity", "C#", "Mobile Development"]
-            }
-        ];
-
-        const skills = ["Unity", "Unreal Engine", "C#", "C++", "3D Modeling", "Game Design", "AI Programming", "Mobile Development"];
-
-        // Function to create project elements
-        function createProjectElement(project) {
-            const projectDiv = document.createElement('div');
-            projectDiv.className = 'project';
-            projectDiv.innerHTML = `
-                <img src="${project.image}" alt="${project.title}">
-                <div class="project-info">
-                    <h3>${project.title}</h3>
-                    <p>${project.description}</p>
-                    <div class="project-tags">
-                        ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
-                    </div>
-                </div>
-            `;
-            return projectDiv;
-        }
-
-        // Function to create skill elements
-        function createSkillElement(skill) {
-            const skillSpan = document.createElement('span');
-            skillSpan.className = 'skill';
-            skillSpan.textContent = skill;
-            return skillSpan;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('nav a');
-            const contactForm = document.getElementById('contact-form');
-            const projectsContainer = document.getElementById('projects-container');
-            const skillsContainer = document.getElementById('skills-container');
-
-            // Populate projects
-            projects.forEach(project => {
-                const projectElement = createProjectElement(project);
-                projectsContainer.appendChild(projectElement);
-
-                // Add pop animation on hover
-                projectElement.addEventListener('mouseenter', () => {
-                    projectElement.style.animation = 'pop 0.3s ease';
-                });
-                projectElement.addEventListener('animationend', () => {
-                    projectElement.style.animation = '';
-                });
-            });
-
-            // Populate skills
-            skills.forEach(skill => {
-                skillsContainer.appendChild(createSkillElement(skill));
-            });
-
-            // Smooth scrolling for navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-
-            // Contact form submission (for demonstration purposes)
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const message = document.getElementById('message').value;
-
-                // In a real application, you would send this data to a server
-                console.log('Form submitted:', { name, email, message });
-                alert('Thank you for your message! I will get back to you soon.');
-                contactForm.reset();
-            });
-
-            // Fade in sections on scroll
-            const sections = document.querySelectorAll('section');
-            const fadeInSection = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            };
-
-            const sectionObserver = new IntersectionObserver(fadeInSection, {
-                root: null,
-                threshold: 0.1
-            });
-
-            sections.forEach(section => {
-                sectionObserver.observe(section);
-            });
-        });
-    </script>
+    <script src="main.js"></script>
 </body>
 
 </html>
