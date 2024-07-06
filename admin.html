@@ -17,9 +17,20 @@
             color: #7B68EE;
         }
 
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"],
         textarea {
             width: 100%;
-            height: 300px;
+            padding: 8px;
         }
 
         button {
@@ -34,53 +45,231 @@
         button:hover {
             background-color: #6A5ACD;
         }
+
+        #loginForm,
+        #adminPanel {
+            display: none;
+        }
+
+        .project,
+        .skill,
+        .socialLink {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 
 <body>
     <h1>Portfolio Admin</h1>
-    <h2>Edit Portfolio Data</h2>
-    <textarea id="portfolioData"></textarea>
-    <br><br>
-    <button onclick="validateJSON()">Validate JSON</button>
-    <button onclick="downloadJSON()">Download JSON</button>
+
+    <div id="loginForm">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+        </div>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="adminPanel">
+        <h2>Edit Portfolio Data</h2>
+        <div id="projectsContainer"></div>
+        <button onclick="addProject()">Add Project</button>
+
+        <h3>Skills</h3>
+        <div id="skillsContainer"></div>
+        <button onclick="addSkill()">Add Skill</button>
+
+        <h3>Social Links</h3>
+        <div id="socialLinksContainer"></div>
+        <button onclick="addSocialLink()">Add Social Link</button>
+
+        <br><br>
+        <button onclick="saveData()">Save Changes</button>
+    </div>
 
     <script>
+        let portfolioData = {};
+        const username = 'admin'; // Change this to your desired username
+        const password = 'password123'; // Change this to your desired password
+
+        function showLoginForm() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function showAdminPanel() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+        }
+
+        function login() {
+            const inputUsername = document.getElementById('username').value;
+            const inputPassword = document.getElementById('password').value;
+            if (inputUsername === username && inputPassword === password) {
+                showAdminPanel();
+                loadData();
+            } else {
+                alert('Invalid username or password');
+            }
+        }
+
         async function loadData() {
             const response = await fetch('portfolio-data.json');
-            const data = await response.json();
-            document.getElementById('portfolioData').value = JSON.stringify(data, null, 2);
+            portfolioData = await response.json();
+            renderData();
         }
 
-        function validateJSON() {
-            const data = document.getElementById('portfolioData').value;
-            try {
-                JSON.parse(data);
-                alert('JSON is valid!');
-            } catch (error) {
-                alert('Invalid JSON. Please check your data.\nError: ' + error.message);
-            }
+        function renderData() {
+            renderProjects();
+            renderSkills();
+            renderSocialLinks();
         }
 
-        function downloadJSON() {
-            const data = document.getElementById('portfolioData').value;
-            try {
-                JSON.parse(data); // Validate JSON
-                const blob = new Blob([data], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'portfolio-data.json';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            } catch (error) {
-                alert('Invalid JSON. Please check your data.\nError: ' + error.message);
-            }
+        function renderProjects() {
+            const container = document.getElementById('projectsContainer');
+            container.innerHTML = '';
+            portfolioData.projects.forEach((project, index) => {
+                const projectDiv = document.createElement('div');
+                projectDiv.className = 'project';
+                projectDiv.innerHTML = `
+                    <h4>Project ${index + 1}</h4>
+                    <div class="form-group">
+                        <label>Title:</label>
+                        <input type="text" value="${project.title}" onchange="updateProject(${index}, 'title', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Description:</label>
+                        <textarea onchange="updateProject(${index}, 'description', this.value)">${project.description}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Image URL:</label>
+                        <input type="text" value="${project.image}" onchange="updateProject(${index}, 'image', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Tags (comma-separated):</label>
+                        <input type="text" value="${project.tags.join(', ')}" onchange="updateProjectTags(${index}, this.value)">
+                    </div>
+                    <button onclick="removeProject(${index})">Remove Project</button>
+                `;
+                container.appendChild(projectDiv);
+            });
         }
 
-        loadData();
+        function renderSkills() {
+            const container = document.getElementById('skillsContainer');
+            container.innerHTML = '';
+            portfolioData.skills.forEach((skill, index) => {
+                const skillDiv = document.createElement('div');
+                skillDiv.className = 'skill';
+                skillDiv.innerHTML = `
+                    <input type="text" value="${skill}" onchange="updateSkill(${index}, this.value)">
+                    <button onclick="removeSkill(${index})">Remove</button>
+                `;
+                container.appendChild(skillDiv);
+            });
+        }
+
+        function renderSocialLinks() {
+            const container = document.getElementById('socialLinksContainer');
+            container.innerHTML = '';
+            portfolioData.socialLinks.forEach((link, index) => {
+                const linkDiv = document.createElement('div');
+                linkDiv.className = 'socialLink';
+                linkDiv.innerHTML = `
+                    <div class="form-group">
+                        <label>Platform:</label>
+                        <input type="text" value="${link.platform}" onchange="updateSocialLink(${index}, 'platform', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>URL:</label>
+                        <input type="text" value="${link.url}" onchange="updateSocialLink(${index}, 'url', this.value)">
+                    </div>
+                    <div class="form-group">
+                        <label>Icon:</label>
+                        <input type="text" value="${link.icon}" onchange="updateSocialLink(${index}, 'icon', this.value)">
+                    </div>
+                    <button onclick="removeSocialLink(${index})">Remove</button>
+                `;
+                container.appendChild(linkDiv);
+            });
+        }
+
+        function updateProject(index, field, value) {
+            portfolioData.projects[index][field] = value;
+        }
+
+        function updateProjectTags(index, value) {
+            portfolioData.projects[index].tags = value.split(',').map(tag => tag.trim());
+        }
+
+        function removeProject(index) {
+            portfolioData.projects.splice(index, 1);
+            renderProjects();
+        }
+
+        function addProject() {
+            portfolioData.projects.push({
+                title: "New Project",
+                description: "Project description",
+                image: "/api/placeholder/400/300",
+                tags: ["Tag1", "Tag2"]
+            });
+            renderProjects();
+        }
+
+        function updateSkill(index, value) {
+            portfolioData.skills[index] = value;
+        }
+
+        function removeSkill(index) {
+            portfolioData.skills.splice(index, 1);
+            renderSkills();
+        }
+
+        function addSkill() {
+            portfolioData.skills.push("New Skill");
+            renderSkills();
+        }
+
+        function updateSocialLink(index, field, value) {
+            portfolioData.socialLinks[index][field] = value;
+        }
+
+        function removeSocialLink(index) {
+            portfolioData.socialLinks.splice(index, 1);
+            renderSocialLinks();
+        }
+
+        function addSocialLink() {
+            portfolioData.socialLinks.push({
+                platform: "New Platform",
+                url: "#",
+                icon: "fas fa-link"
+            });
+            renderSocialLinks();
+        }
+
+        function saveData() {
+            const dataStr = JSON.stringify(portfolioData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'portfolio-data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        showLoginForm();
     </script>
 </body>
 
