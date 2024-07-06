@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Admin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1,
+        h2 {
+            color: #7B68EE;
+        }
+
+        textarea {
+            width: 100%;
+            height: 300px;
+        }
+
+        button {
+            background-color: #7B68EE;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background-color: #6A5ACD;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Portfolio Admin</h1>
+    <h2>Edit Portfolio Data</h2>
+    <textarea id="portfolioData"></textarea>
+    <br><br>
+    <button onclick="validateJSON()">Validate JSON</button>
+    <button onclick="downloadJSON()">Download JSON</button>
+
+    <script>
+        async function loadData() {
+            const response = await fetch('portfolio-data.json');
+            const data = await response.json();
+            document.getElementById('portfolioData').value = JSON.stringify(data, null, 2);
+        }
+
+        function validateJSON() {
+            const data = document.getElementById('portfolioData').value;
+            try {
+                JSON.parse(data);
+                alert('JSON is valid!');
+            } catch (error) {
+                alert('Invalid JSON. Please check your data.\nError: ' + error.message);
+            }
+        }
+
+        function downloadJSON() {
+            const data = document.getElementById('portfolioData').value;
+            try {
+                JSON.parse(data); // Validate JSON
+                const blob = new Blob([data], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'portfolio-data.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (error) {
+                alert('Invalid JSON. Please check your data.\nError: ' + error.message);
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+
+</html>
