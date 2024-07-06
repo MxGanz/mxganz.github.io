@@ -31,34 +31,12 @@ function createSkillElement(skill) {
     return skillSpan;
 }
 
-// Function to create social link elements
-// function createSocialLinkElement(socialLink) {
-//     const { platform, url, icon } = socialLink;
-//     const linkElement = document.createElement('a');
-//     linkElement.href = url;
-//     linkElement.target = "_blank";
-//     linkElement.title = platform;
-
-//     const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-//     svgElement.setAttribute("width", "24");
-//     svgElement.setAttribute("height", "24");
-
-//     const useElement = document.createElementNS("http://www.w3.org/2000/svg", "use");
-//     useElement.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", `#icon-${icon}`);
-
-//     svgElement.appendChild(useElement);
-//     linkElement.appendChild(svgElement);
-
-//     return linkElement;
-// }
-
 document.addEventListener('DOMContentLoaded', async () => {
     const portfolioData = await loadPortfolioData();
     const navLinks = document.querySelectorAll('nav a');
     const contactForm = document.getElementById('contact-form');
     const projectsContainer = document.getElementById('projects-container');
     const skillsContainer = document.getElementById('skills-container');
-    const socialLinksContainer = document.querySelector('.social-links');
 
     // Populate projects
     portfolioData.projects.forEach(project => {
@@ -77,11 +55,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Populate skills
     portfolioData.skills.forEach(skill => {
         skillsContainer.appendChild(createSkillElement(skill));
-    });
-
-    // Populate social links
-    portfolioData.socialLinks.forEach(link => {
-        socialLinksContainer.appendChild(createSocialLinkElement(link));
     });
 
     // Smooth scrolling for navigation links
