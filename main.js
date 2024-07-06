@@ -39,24 +39,12 @@ function createSocialLinkElement(socialLink) {
     linkElement.target = "_blank";
     linkElement.title = platform;
 
-    const iconElement = document.createElement('div');
-    iconElement.className = `icon ${icon}`;
+    const iconElement = document.createElement('svg');
+    iconElement.innerHTML = `<use xlink:href="#${icon}"></use>`;
     linkElement.appendChild(iconElement);
 
     return linkElement;
 }
-
-fetch('portfolio-data.json')
-    .then(response => response.json())
-    .then(data => {
-        const socialLinksContainer = document.querySelector('.social-links');
-        data.socialLinks.forEach(socialLink => {
-            const socialLinkElement = createSocialLinkElement(socialLink);
-            socialLinksContainer.appendChild(socialLinkElement);
-        });
-    })
-    .catch(error => console.error('Error loading portfolio data:', error));
-
 
 document.addEventListener('DOMContentLoaded', async () => {
     const portfolioData = await loadPortfolioData();
@@ -96,7 +84,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            targetElement.scrollIntoView({ behavior: 'smooth' });
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
         });
     });
 

@@ -22,7 +22,7 @@ header {
     color: var(--light-purple);
     text-align: center;
     padding: 2rem 0;
-    background-image: url('assets/background.jpg');
+    background-image: url('/assets/background.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -36,6 +36,15 @@ header {
     border-radius: 10px;
     width: 100%;
     max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-links-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .social-links {
@@ -43,6 +52,17 @@ header {
     justify-content: center;
     align-items: center;
     margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    color: var(--light-purple);
+    margin: 0.5rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links svg {
+    size: 24px;
 }
 
 /* header {
@@ -66,17 +86,38 @@ h1 {
     margin-bottom: 1rem;
 }
 
-/* .social-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-} */
-
-.social-links a {
+footer {
+    background-color: var(--black);
     color: var(--light-purple);
-    margin: 0 0.5rem;
-    transition: color 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+footer p {
+    margin: 0;
+}
+
+#adminLogin {
+    background-color: var(--royal-purple);
+    color: var(--light-purple);
+    /* justify-content: right; */
+    position: absolute;
+    right: 10%;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#adminLogin:hover {
+    background-color: var(--black);
+    transform: scale(1.05);
 }
 
 .social-links a:hover {
@@ -85,8 +126,8 @@ h1 {
 }
 
 .icon {
-    width: 24px;
-    height: 24px;
+    width: 50dp;
+    height: 50dp;
 }
 
 nav {
@@ -235,17 +276,11 @@ button {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+button
+
 button:hover {
     background-color: var(--black);
     transform: scale(1.05);
-}
-
-footer {
-    background-color: var(--black);
-    color: var(--light-purple);
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 2rem;
 }
 
 @keyframes pop {

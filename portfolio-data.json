@@ -48,27 +48,27 @@
     {
       "platform": "Instagram",
       "url": "",
-      "icon": "instagram-icon"
+      "icon": "icon-instagram"
     },
     {
       "platform": "Buy Me A Coffee",
       "url": "https://www.buymeacoffee.com/mxganz",
-      "icon": "buymeacoffee-icon"
+      "icon": "icon-buymeacoffee"
     },
     {
       "platform": "GitHub",
       "url": "https://www.github.com/mxganz",
-      "icon": "github-icon"
+      "icon": "icon-github"
     },
     {
       "platform": "Google Play",
       "url": "",
-      "icon": "googleplay-icon"
+      "icon": "icon-googleplay"
     },
     {
       "platform": "Steam",
       "url": "",
-      "icon": "steam-icon"
+      "icon": "icon-steam"
     }
   ]
 }
