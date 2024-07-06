@@ -4,18 +4,42 @@
       "title": "Sample 1",
       "description": "A space-themed action RPG with stunning visuals and an intricate storyline. Developed using Unreal Engine.",
       "image": "/api/placeholder/400/300",
-      "tags": ["Unreal Engine", "C++", "3D Modeling"]
+      "tags": [
+        "Unreal Engine",
+        "C++",
+        "3D Modeling"
+      ]
     },
     {
       "title": "Sample 2",
       "description": "A mobile puzzle game that challenges players' logical thinking. Built with Godot for Android.",
       "image": "/api/placeholder/400/300",
-      "tags": ["Godot", "C#", "Mobile Development"]
+      "tags": [
+        "Godot",
+        "C#",
+        "Mobile Development"
+      ]
+    },
+    {
+      "title": "New Project",
+      "description": "Project description",
+      "image": "/api/placeholder/400/300",
+      "tags": [
+        "Tag1",
+        "Tag2"
+      ]
     }
   ],
   "skills": [
-    "Godot", "C#", "Web Dev", "Java", "Python", "3D Modeling", "Game Design",
-    "Mobile Dev", "Game Art"
+    "Godot",
+    "C#",
+    "Web Dev",
+    "Java",
+    "Python",
+    "3D Modeling",
+    "Game Design",
+    "Mobile Dev",
+    "Game Art"
   ],
   "socialLinks": [
     {
@@ -25,7 +49,7 @@
     },
     {
       "platform": "Buy Me A Coffee",
-      "url": "#",
+      "url": "#buymeacoffee.com/mxganz",
       "icon": "fas fa-mug-hot"
     },
     {
