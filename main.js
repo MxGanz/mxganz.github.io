@@ -1,20 +1,8 @@
-// Data for projects and skills
-const projects = [
-    {
-        title: "Cosmic Crusaders",
-        description: "A space-themed action RPG with stunning visuals and an intricate storyline. Developed using Unreal Engine.",
-        image: "/api/placeholder/400/300",
-        tags: ["Unreal Engine", "C++", "3D Modeling"]
-    },
-    {
-        title: "Puzzle Paradise",
-        description: "A mobile puzzle game that challenges players' logical thinking. Built with Unity for iOS and Android.",
-        image: "/api/placeholder/400/300",
-        tags: ["Unity", "C#", "Mobile Development"]
-    }
-];
-
-const skills = ["Unity", "Unreal Engine", "C#", "C++", "3D Modeling", "Game Design", "AI Programming", "Mobile Development"];
+// Load portfolio data from JSON file
+async function loadPortfolioData() {
+    const response = await fetch('portfolio-data.json');
+    return await response.json();
+}
 
 // Function to create project elements
 function createProjectElement(project) {
@@ -41,14 +29,26 @@ function createSkillElement(skill) {
     return skillSpan;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// Function to create social link elements
+function createSocialLinkElement(link) {
+    const socialLink = document.createElement('a');
+    socialLink.href = link.url;
+    socialLink.target = "_blank";
+    socialLink.title = link.platform;
+    socialLink.innerHTML = `<i class="${link.icon}"></i>`;
+    return socialLink;
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const portfolioData = await loadPortfolioData();
     const navLinks = document.querySelectorAll('nav a');
     const contactForm = document.getElementById('contact-form');
     const projectsContainer = document.getElementById('projects-container');
     const skillsContainer = document.getElementById('skills-container');
+    const socialLinksContainer = document.querySelector('.social-links');
 
     // Populate projects
-    projects.forEach(project => {
+    portfolioData.projects.forEach(project => {
         const projectElement = createProjectElement(project);
         projectsContainer.appendChild(projectElement);
 
@@ -62,8 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Populate skills
-    skills.forEach(skill => {
+    portfolioData.skills.forEach(skill => {
         skillsContainer.appendChild(createSkillElement(skill));
+    });
+
+    // Populate social links
+    portfolioData.socialLinks.forEach(link => {
+        socialLinksContainer.appendChild(createSocialLinkElement(link));
     });
 
     // Smooth scrolling for navigation links
