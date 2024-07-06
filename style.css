@@ -9,4 +9,10 @@ canvas {
     background-color: #eee;
     display: block;
     margin: 0 auto;
+    
+}
+
+button {
+    display: block;
+    background-color: cadetblue;
 }
