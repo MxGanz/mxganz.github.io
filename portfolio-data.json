@@ -44,18 +44,29 @@
   "socialLinks": [
     {
       "platform": "Instagram",
-      "url": "#",
-      "icon": "fab fa-instagram"
+      "url": "",
+      "icon": "instagram-icon"
     },
     {
       "platform": "Buy Me A Coffee",
-      "url": "#buymeacoffee.com/mxganz",
-      "icon": "fas fa-mug-hot"
+      "url": "https://www.buymeacoffee.com/mxganz",
+      "icon": "buymeacoffee-icon"
     },
     {
       "platform": "GitHub",
-      "url": "#",
-      "icon": "fab fa-github"
+      "url": "https://www.github.com/mxganz",
+      "icon": "github-icon"
+    },
+    {
+      "platform": "Google Play",
+      "url": "",
+      "icon": "googleplay-icon"
+    },
+    {
+      "platform": "Steam",
+      "url": "",
+      "icon": "steam-icon"
     }
-  ]
+]
+
 }

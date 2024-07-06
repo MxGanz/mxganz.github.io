@@ -30,14 +30,31 @@ function createSkillElement(skill) {
 }
 
 // Function to create social link elements
-function createSocialLinkElement(link) {
-    const socialLink = document.createElement('a');
-    socialLink.href = link.url;
-    socialLink.target = "_blank";
-    socialLink.title = link.platform;
-    socialLink.innerHTML = `<i class="${link.icon}"></i>`;
-    return socialLink;
+function createSocialLinkElement(socialLink) {
+    const { platform, url, icon } = socialLink;
+    const linkElement = document.createElement('a');
+    linkElement.href = url;
+    linkElement.target = "_blank";
+    linkElement.title = platform;
+
+    const iconElement = document.createElement('div');
+    iconElement.className = `icon ${icon}`;
+    linkElement.appendChild(iconElement);
+
+    return linkElement;
 }
+
+fetch('portfolio-data.json')
+    .then(response => response.json())
+    .then(data => {
+        const socialLinksContainer = document.querySelector('.social-links');
+        data.socialLinks.forEach(socialLink => {
+            const socialLinkElement = createSocialLinkElement(socialLink);
+            socialLinksContainer.appendChild(socialLinkElement);
+        });
+    })
+    .catch(error => console.error('Error loading portfolio data:', error));
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     const portfolioData = await loadPortfolioData();
