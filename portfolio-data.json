@@ -8,7 +8,8 @@
         "Unreal Engine",
         "C++",
         "3D Modeling"
-      ]
+      ],
+      "link": "https://youtube.com"
     },
     {
       "title": "Sample 2",
@@ -18,7 +19,8 @@
         "Godot",
         "C#",
         "Mobile Development"
-      ]
+      ],
+      "link": "/project1.html"
     },
     {
       "title": "New Project",
@@ -27,7 +29,8 @@
       "tags": [
         "Tag1",
         "Tag2"
-      ]
+      ],
+      "link": ""
     }
   ],
   "skills": [
@@ -67,6 +70,5 @@
       "url": "",
       "icon": "steam-icon"
     }
-]
-
+  ]
 }

@@ -9,14 +9,16 @@ function createProjectElement(project) {
     const projectDiv = document.createElement('div');
     projectDiv.className = 'project';
     projectDiv.innerHTML = `
-        <img src="${project.image}" alt="${project.title}">
-        <div class="project-info">
-            <h3>${project.title}</h3>
-            <p>${project.description}</p>
-            <div class="project-tags">
-                ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+        <a href="${project.link}" target="_blank">
+            <img src="${project.image}" alt="${project.title}">
+            <div class="project-info">
+                <h3>${project.title}</h3>
+                <p>${project.description}</p>
+                <div class="project-tags">
+                    ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+                </div>
             </div>
-        </div>
+        </a>
     `;
     return projectDiv;
 }
