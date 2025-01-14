@@ -1,36 +1,15 @@
 {
   "projects": [
     {
-      "title": "Sample 1",
-      "description": "A space-themed action RPG with stunning visuals and an intricate storyline. Developed using Unreal Engine.",
-      "image": "/api/placeholder/400/300",
-      "tags": [
-        "Unreal Engine",
-        "C++",
-        "3D Modeling"
-      ],
-      "link": "https://youtube.com"
-    },
-    {
-      "title": "Sample 2",
-      "description": "A mobile puzzle game that challenges players' logical thinking. Built with Godot for Android.",
-      "image": "/api/placeholder/400/300",
+      "title": "Bit Break",
+      "description": "Bit Break is a focus-bending twist on the classic brick breaker. Made in Godot 4.3 for the Goed Game Jam. ",
+      "image": "/assets/bit_break_banner.png",
       "tags": [
         "Godot",
-        "C#",
-        "Mobile Development"
+        "2D",
+        "Game Jam"
       ],
-      "link": "/project1.html"
-    },
-    {
-      "title": "New Project",
-      "description": "Project description",
-      "image": "/api/placeholder/400/300",
-      "tags": [
-        "Tag1",
-        "Tag2"
-      ],
-      "link": ""
+      "link": "https://mxganz.itch.io/bit-break"
     }
   ],
   "skills": [
@@ -45,11 +24,6 @@
     "Game Art"
   ],
   "socialLinks": [
-    {
-      "platform": "Instagram",
-      "url": "",
-      "icon": "icon-instagram"
-    },
     {
       "platform": "Buy Me A Coffee",
       "url": "https://www.buymeacoffee.com/mxganz",
@@ -69,6 +43,11 @@
       "platform": "Steam",
       "url": "",
       "icon": "icon-steam"
+    },
+    {
+      "platform": "Itch.io",
+      "url": "mxganz.itch.io",
+      "icon": "icon-itch"
     }
   ]
 }
