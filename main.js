@@ -11,7 +11,7 @@ function createProjectElement(project) {
     projectDiv.innerHTML = `
         <a href="${project.link}" target="_blank">
             <img src="${project.image}" alt="${project.title}">
-            <div class="project-info" style="display:block; margin:0 auto;">
+            <div class="project-info">
                 <h3>${project.title}</h3>
                 <p>${project.description}</p>
                 <div class="project-tags">
